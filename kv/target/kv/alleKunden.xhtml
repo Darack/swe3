@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:head>
+		<link rel="stylesheet" href="resources/alleKunden.css" type="text/css" />
+		<title>
+			<ui:insert name="title">
+				Kundenverwaltung 1.0
+			</ui:insert>
+		</title>
+	</h:head>
+	<h:body>
+		<div id="header">
+			<ui:insert name="header">
+				Dies ist mein header!
+			</ui:insert>
+		</div>
+		<div id="content">
+			<ui:insert name="content">
+				Dies ist mein content!
+			</ui:insert>
+			
+			<h:dataTable var="kunde" value="#{kundenHandler.kundenListe}" rowClasses="odd,even" headerClass="header">
+				<f:facet name="header">Kunden</f:facet>
+				<h:column>
+					<f:facet name="header">Vorname</f:facet>
+					<h:outputText value="#{kunde.vorname}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nachname</f:facet>
+					<h:outputText value="#{kunde.nachname}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Geburtsdatum</f:facet>
+					<div align="center">
+						<h:outputText value="#{kunde.geburtsdatum}" />
+					</div>
+				</h:column>
+			</h:dataTable>
+			
+		</div>
+		<div id="footer">
+			<ui:insert name="footer">
+				Dies ist mein footer!
+			</ui:insert>
+		</div>
+	</h:body>
+
+</html>
