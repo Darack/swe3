@@ -6,15 +6,18 @@ public class Kunde {
 	 * @param nachname
 	 * @param geburtsdatum
 	 */
-	public Kunde(String vorname, String nachname, String geburtsdatum) {
+	public Kunde(String vorname, String nachname, java.time.LocalDate geburtsdatum) {
 		super();
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.geburtsdatum = geburtsdatum;
 	}
+	
+	public Kunde() {}
+	
 	private String vorname;
 	private String nachname;
-	private String geburtsdatum;
+	private java.time.LocalDate geburtsdatum;
 	
 	public String getVorname() {
 		return vorname;
@@ -28,10 +31,10 @@ public class Kunde {
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
 	}
-	public String getGeburtsdatum() {
+	public java.time.LocalDate getGeburtsdatum() {
 		return geburtsdatum;
 	}
-	public void setGeburtsdatum(String geburtsdatum) {
+	public void setGeburtsdatum(java.time.LocalDate geburtsdatum) {
 		this.geburtsdatum = geburtsdatum;
 	}
 }
