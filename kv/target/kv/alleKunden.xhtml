@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<h:head>
 		<link rel="stylesheet" href="resources/alleKunden.css" type="text/css" />
@@ -37,10 +39,20 @@
 				<h:column>
 					<f:facet name="header">Geburtsdatum</f:facet>
 					<div align="center">
-						<h:outputText value="#{kunde.geburtsdatum}" />
+						<c:set var="dob" value="#{kunde.geburtsdatum}" />
+						<c:set var="jahr" value="#{fn:substring(dob, 0, 4)}" />
+						<c:set var="monat" value="#{fn:substring(dob, 5, 7)}" />
+						<c:set var="tag" value="#{fn:substring(dob, 8, 10)}" />
+						<h:outputText value="#{tag.concat('.').concat(monat).concat('.').concat(tag)}" />
+						<!-- <h:outputText value="#{kunde.geburtsdatum}" /> -->
 					</div>
 				</h:column>
 			</h:dataTable>
+			
+			<h:form>
+				<h:commandButton action="/neuerKunde.xhtml" value="Neuer Kunde" />
+				<!-- <h:commandLink action="/neuerKunde.xhtml" value="Neuer Kunde" /> -->
+			</h:form>
 			
 		</div>
 		<div id="footer">
