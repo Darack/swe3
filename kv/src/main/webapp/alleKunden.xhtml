@@ -26,7 +26,7 @@
 				Dies ist mein content!
 			</ui:insert>
 			
-			<h:dataTable var="kunde" value="#{kundenHandler.kundenListe}" rowClasses="odd,even" headerClass="header">
+			<h:dataTable var="kunde" value="#{kundenHandler.kunden}" rowClasses="odd,even" headerClass="header">
 				<f:facet name="header">Kunden</f:facet>
 				<h:column>
 					<f:facet name="header">Vorname</f:facet>
@@ -38,19 +38,23 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">Geburtsdatum</f:facet>
-					<div align="center">
+					
+					<h:outputText value="#{kunde.geburtsdatum}">
+						<f:convertDateTime pattern="dd.MM.yy"/>
+					</h:outputText>
+<!-- 					<div align="center">geburtsdatum
 						<c:set var="dob" value="#{kunde.geburtsdatum}" />
 						<c:set var="jahr" value="#{fn:substring(dob, 0, 4)}" />
 						<c:set var="monat" value="#{fn:substring(dob, 5, 7)}" />
 						<c:set var="tag" value="#{fn:substring(dob, 8, 10)}" />
 						<h:outputText value="#{tag.concat('.').concat(monat).concat('.').concat(tag)}" />
-						<!-- <h:outputText value="#{kunde.geburtsdatum}" /> -->
-					</div>
+						<h:outputText value="#{kunde.geburtsdatum}" />
+					</div> -->
 				</h:column>
 			</h:dataTable>
 			
 			<h:form>
-				<h:commandButton action="/neuerKunde.xhtml" value="Neuer Kunde" />
+				<h:commandButton action="#{kundenHandler.neu()}" value="Neuer Kunde" />
 				<!-- <h:commandLink action="/neuerKunde.xhtml" value="Neuer Kunde" /> -->
 			</h:form>
 			

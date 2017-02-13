@@ -1,12 +1,30 @@
 package de.hsb.app.kv.model;
 
-public class Kunde {
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@NamedQuery(name="SelectKunden", query="Select k from Kunde k")
+@Entity
+public class Kunde implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4577144906447676024L;
+	
 	/**
 	 * @param vorname
 	 * @param nachname
 	 * @param geburtsdatum
 	 */
-	public Kunde(String vorname, String nachname, java.time.LocalDate geburtsdatum) {
+	public Kunde(String vorname, String nachname, Date geburtsdatum) {
 		super();
 		this.vorname = vorname;
 		this.nachname = nachname;
@@ -15,9 +33,14 @@ public class Kunde {
 	
 	public Kunde() {}
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer id;
+	
 	private String vorname;
 	private String nachname;
-	private java.time.LocalDate geburtsdatum;
+	@Temporal(TemporalType.DATE)
+	private Date geburtsdatum;
 	
 	public String getVorname() {
 		return vorname;
@@ -31,10 +54,10 @@ public class Kunde {
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
 	}
-	public java.time.LocalDate getGeburtsdatum() {
+	public Date getGeburtsdatum() {
 		return geburtsdatum;
 	}
-	public void setGeburtsdatum(java.time.LocalDate geburtsdatum) {
+	public void setGeburtsdatum(Date geburtsdatum) {
 		this.geburtsdatum = geburtsdatum;
 	}
 }

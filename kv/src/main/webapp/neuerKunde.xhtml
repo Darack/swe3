@@ -26,26 +26,26 @@
 				<h:panelGrid>
 					<h:outputLabel value="Vorname:" for="vorname" />
 					<h:panelGroup>
-						<h:inputText id="vorname" value="#{kunde.vorname}" required="true" requiredMessage="Eingabe fehlt"/>
+						<h:inputText id="vorname" value="#{kundenHandler.merkeKunde.vorname}" required="true" requiredMessage="Eingabe fehlt"/>
 						<h:message for="vorname" styleClass="message"/>
 					</h:panelGroup>
 					
 					<h:outputLabel value="Nachname" for="nachname" />
 					<h:panelGroup>
-						<h:inputText id="nachname" value="#{kunde.nachname}" required="true" requiredMessage="Eingabe fehlt"/>
+						<h:inputText id="nachname" value="#{kundenHandler.merkeKunde.nachname}" required="true" requiredMessage="Eingabe fehlt"/>
 						<h:message for="nachname" styleClass="message"/>
 					</h:panelGroup>
 					
 					<h:outputLabel value="Geburtsdatum" for="geburtsdatum" />
 					<h:panelGroup>
-						<h:inputText id="geburtsdatum" value="#{kunde.geburtsdatum}" required="true" requiredMessage="Eingabe fehlt"/>
+						<h:inputText id="geburtsdatum" value="#{kundenHandler.merkeKunde.geburtsdatum}" required="true" requiredMessage="Eingabe fehlt"/>
 						<h:message for="geburtsdatum" styleClass="message"/>
 					</h:panelGroup>
 				</h:panelGrid>
 				
-				<h:commandButton action="#{kundenHandler.neu(kunde)}" value="Speichern" />
+				<h:commandButton action="#{kundenHandler.speichern()}" value="Speichern" />
 			</h:form>
-					
+			
 		</div>
 		<div id="footer">
 			<ui:insert name="footer">
