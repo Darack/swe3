@@ -38,7 +38,10 @@
 					
 					<h:panelGroup>
 						<h:outputLabel value="Kreditkartennummer:" for="kreditkartennummer" />
-						<h:inputText id="kreditkartennummer" value="#{kundenHandler.merkeKreditkarte.nummer}" required="true" requiredMessage="Eingabe fehlt"/>
+						<h:inputText id="kreditkartennummer" value="#{kundenHandler.merkeKreditkarte.nummer}" required="true" requiredMessage="Eingabe fehlt">
+							<f:converter converterId= "kreditkartenConverter" />
+							<f:validator validatorId="kreditkartenValidator" />
+						</h:inputText>
 						<h:message for="kreditkartennummer" styleClass="message"/>
 					</h:panelGroup>
 					
@@ -60,7 +63,7 @@
 				</h:panelGrid>
 				
 				<h:commandButton action="#{kundenHandler.kreditkarteSpeichern()}" value="Speichern" />
-				<h:commandButton action="#{kundenHandler.abbrechen()}" value="Abbrechen" />
+				<h:commandButton action="#{kundenHandler.abbrechen()}" value="Abbrechen" immediate="true" />
 			</h:form>
 			
 		</div>
