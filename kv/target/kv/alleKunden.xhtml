@@ -47,16 +47,15 @@
 					<h:outputText value="#{kunde.geburtsdatum}">
 						<f:convertDateTime pattern="dd.MM.yyyy"/>
 					</h:outputText>
-<!-- 					<div align="center">geburtsdatum
-						<c:set var="dob" value="#{kunde.geburtsdatum}" />
-						<c:set var="jahr" value="#{fn:substring(dob, 0, 4)}" />
-						<c:set var="monat" value="#{fn:substring(dob, 5, 7)}" />
-						<c:set var="tag" value="#{fn:substring(dob, 8, 10)}" />
-						<h:outputText value="#{tag.concat('.').concat(monat).concat('.').concat(tag)}" />
-						<h:outputText value="#{kunde.geburtsdatum}" />
-					</div> -->
 				</h:column>
 				
+				
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:form>
+						<h:commandButton action="#{kundenHandler.editCard()}" value="Kreditkarte" />
+					</h:form>
+				</h:column>
 				
 				<h:column>
 					<f:facet name="header"></f:facet>
@@ -64,6 +63,7 @@
 						<h:commandButton action="#{kundenHandler.edit()}" value="edit" />
 					</h:form>
 				</h:column>
+				
 				<h:column>
 					<f:facet name="header"></f:facet>
 					<h:form>

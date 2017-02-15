@@ -18,6 +18,8 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import de.hsb.app.kv.model.Anrede;
+import de.hsb.app.kv.model.Kreditkarte;
+import de.hsb.app.kv.model.Kreditkartentyp;
 import de.hsb.app.kv.model.Kunde;
 
 @ManagedBean(name = "kundenHandler")
@@ -32,6 +34,7 @@ public class KundenHandler {
 	
 	private DataModel<Kunde> kunden;
 	private Kunde merkeKunde = new Kunde();
+	private Kreditkarte merkeKreditkarte = new Kreditkarte();
 	
 //	private List<Kunde> kundenListe = Arrays.asList(new Kunde[] {
 //			new Kunde("Hugo", "Hermann", new Date(1970, 1, 1)),
@@ -80,6 +83,38 @@ public class KundenHandler {
 		return "alleKunden";
 	}
 	
+	public String kreditkarteSpeichern() {
+		merkeKunde.setKreditkarte(merkeKreditkarte);
+		
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			merkeKreditkarte = em.merge(merkeKreditkarte);
+			em.persist(merkeKunde);
+			em.persist(merkeKreditkarte);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
+		} catch (NotSupportedException | SystemException | SecurityException | IllegalStateException | RollbackException 
+				| HeuristicMixedException | HeuristicRollbackException e) {
+			e.printStackTrace();
+		}
+		
+		return "alleKunden";
+	}
+	
+	public String abbrechen() {
+		return "alleKunden";
+	}
+	
+	public String editCard() {
+		merkeKunde = kunden.getRowData();
+		merkeKreditkarte = merkeKunde.getKreditkarte();
+		if (merkeKreditkarte == null) {
+			merkeKreditkarte = new Kreditkarte();
+		}
+		return "kreditKarte";
+	}
+	
 	public String edit() {
 		merkeKunde = kunden.getRowData();
 		return "neuerKunde";
@@ -106,6 +141,10 @@ public class KundenHandler {
 		return Anrede.values();
 	}
 	
+	public Kreditkartentyp[] getKreditkartentypValues() {
+		return Kreditkartentyp.values();
+	}
+	
 //	public List<Kunde> getKundenListe() {
 //		return kundenListe;
 //	}
@@ -128,5 +167,13 @@ public class KundenHandler {
 
 	public void setMerkeKunde(Kunde merkeKunde) {
 		this.merkeKunde = merkeKunde;
+	}
+
+	public Kreditkarte getMerkeKreditkarte() {
+		return merkeKreditkarte;
+	}
+
+	public void setMerkeKreditkarte(Kreditkarte merkeKarte) {
+		this.merkeKreditkarte = merkeKarte;
 	}
 }

@@ -3,11 +3,13 @@ package de.hsb.app.kv.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -43,6 +45,8 @@ public class Kunde implements Serializable {
 	private String nachname;
 	@Temporal(TemporalType.DATE)
 	private Date geburtsdatum;
+	@OneToOne(cascade=CascadeType.ALL)
+	private Kreditkarte kreditkarte;
 	
 	public String getVorname() {
 		return vorname;
@@ -69,5 +73,13 @@ public class Kunde implements Serializable {
 
 	public void setAnrede(Anrede anrede) {
 		this.anrede = anrede;
+	}
+
+	public Kreditkarte getKreditkarte() {
+		return kreditkarte;
+	}
+
+	public void setKreditkarte(Kreditkarte kreditkarte) {
+		this.kreditkarte = kreditkarte;
 	}
 }
