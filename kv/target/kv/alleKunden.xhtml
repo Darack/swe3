@@ -28,6 +28,11 @@
 			
 			<h:dataTable var="kunde" value="#{kundenHandler.kunden}" rowClasses="odd,even" headerClass="header">
 				<f:facet name="header">Kunden</f:facet>
+				
+				<h:column>
+					<f:facet name="header">Anrede</f:facet>
+					<h:outputText value="#{kunde.anrede.label}" />
+				</h:column>
 				<h:column>
 					<f:facet name="header">Vorname</f:facet>
 					<h:outputText value="#{kunde.vorname}" />
@@ -40,7 +45,7 @@
 					<f:facet name="header">Geburtsdatum</f:facet>
 					
 					<h:outputText value="#{kunde.geburtsdatum}">
-						<f:convertDateTime pattern="dd.MM.yy"/>
+						<f:convertDateTime pattern="dd.MM.yyyy"/>
 					</h:outputText>
 <!-- 					<div align="center">geburtsdatum
 						<c:set var="dob" value="#{kunde.geburtsdatum}" />
@@ -51,6 +56,22 @@
 						<h:outputText value="#{kunde.geburtsdatum}" />
 					</div> -->
 				</h:column>
+				
+				
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:form>
+						<h:commandButton action="#{kundenHandler.edit()}" value="edit" />
+					</h:form>
+				</h:column>
+				<h:column>
+					<f:facet name="header"></f:facet>
+					<h:form>
+						<h:commandButton action="#{kundenHandler.delete()}" value="delete" />
+					</h:form>
+				</h:column>
+				
+				
 			</h:dataTable>
 			
 			<h:form>

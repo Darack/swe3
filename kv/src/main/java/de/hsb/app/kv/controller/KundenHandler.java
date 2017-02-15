@@ -17,6 +17,7 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
+import de.hsb.app.kv.model.Anrede;
 import de.hsb.app.kv.model.Kunde;
 
 @ManagedBean(name = "kundenHandler")
@@ -44,18 +45,16 @@ public class KundenHandler {
 	public void init() {
 		try {
 			utx.begin();
-			em.persist(new Kunde("Hugo", "Hermann", new Date(1970, 1, 1)));
-			em.persist(new Kunde("Willi", "Meier", new Date(1960, 2, 2)));
-			em.persist(new Kunde("Alan", "Turing", new Date(1912, 6, 23)));
-			em.persist(new Kunde("Donald", "Knuth", new Date(1938, 1, 10)));
-			em.persist(new Kunde("Edsger W.", "Dijkstra", new Date(1930, 5, 11)));
+			em.persist(new Kunde(Anrede.HERR, "Hugo", "Hermann", new Date(1970, 1, 1)));
+			em.persist(new Kunde(Anrede.HERR, "Willi", "Meier", new Date(1960, 2, 2)));
+			em.persist(new Kunde(Anrede.HERR, "Alan", "Turing", new Date(1912, 6, 23)));
+			em.persist(new Kunde(Anrede.HERR, "Donald", "Knuth", new Date(1938, 1, 10)));
+			em.persist(new Kunde(Anrede.HERR, "Edsger W.", "Dijkstra", new Date(1930, 5, 11)));
 			kunden = new ListDataModel<Kunde>();
 			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException
 				| HeuristicMixedException | HeuristicRollbackException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			System.out.println("error in init()");
 		}
 	}
@@ -75,12 +74,36 @@ public class KundenHandler {
 			utx.commit();
 		} catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException
 				| HeuristicMixedException | HeuristicRollbackException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
 			System.out.println("error in speichern()");
 		}
 		
 		return "alleKunden";
+	}
+	
+	public String edit() {
+		merkeKunde = kunden.getRowData();
+		return "neuerKunde";
+	}
+	
+	public String delete() {
+		merkeKunde = kunden.getRowData();
+		
+		try {
+			utx.begin();
+			merkeKunde = em.merge(merkeKunde);
+			em.remove(merkeKunde);
+			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+			utx.commit();
+		} catch (SecurityException | IllegalStateException | NotSupportedException | SystemException | RollbackException
+				| HeuristicMixedException | HeuristicRollbackException e) {
+			e.printStackTrace();
+		}
+		
+		return "alleKunden";
+	}
+	
+	public Anrede[] getAnredeValues() {
+		return Anrede.values();
 	}
 	
 //	public List<Kunde> getKundenListe() {

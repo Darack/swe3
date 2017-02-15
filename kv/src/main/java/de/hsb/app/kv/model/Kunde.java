@@ -24,8 +24,9 @@ public class Kunde implements Serializable {
 	 * @param nachname
 	 * @param geburtsdatum
 	 */
-	public Kunde(String vorname, String nachname, Date geburtsdatum) {
+	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum) {
 		super();
+		this.anrede = anrede;
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.geburtsdatum = geburtsdatum;
@@ -37,6 +38,7 @@ public class Kunde implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 	
+	private Anrede anrede;
 	private String vorname;
 	private String nachname;
 	@Temporal(TemporalType.DATE)
@@ -59,5 +61,13 @@ public class Kunde implements Serializable {
 	}
 	public void setGeburtsdatum(Date geburtsdatum) {
 		this.geburtsdatum = geburtsdatum;
+	}
+
+	public Anrede getAnrede() {
+		return anrede;
+	}
+
+	public void setAnrede(Anrede anrede) {
+		this.anrede = anrede;
 	}
 }

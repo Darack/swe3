@@ -24,6 +24,13 @@
 			
 			<h:form>
 				<h:panelGrid>
+					<h:outputLabel value="Anrede:" for="anrede" />
+					<h:panelGroup>
+						<h:selectOneMenu id="anrede" value="#{kundenHandler.merkeKunde.anrede}">
+							<f:selectItems var="form" value="#{kundenHandler.anredeValues}" itemValue="#{form}" itemLabel="#{form.label}" />
+						</h:selectOneMenu>
+					</h:panelGroup>
+					
 					<h:outputLabel value="Vorname:" for="vorname" />
 					<h:panelGroup>
 						<h:inputText id="vorname" value="#{kundenHandler.merkeKunde.vorname}" required="true" requiredMessage="Eingabe fehlt"/>
@@ -36,9 +43,11 @@
 						<h:message for="nachname" styleClass="message"/>
 					</h:panelGroup>
 					
-					<h:outputLabel value="Geburtsdatum" for="geburtsdatum" />
+					<h:outputLabel value="Geburtsdatum (dd.MM.yyyy)" for="geburtsdatum" />
 					<h:panelGroup>
-						<h:inputText id="geburtsdatum" value="#{kundenHandler.merkeKunde.geburtsdatum}" required="true" requiredMessage="Eingabe fehlt"/>
+						<h:inputText id="geburtsdatum" value="#{kundenHandler.merkeKunde.geburtsdatum}" required="true" requiredMessage="Eingabe fehlt">
+							<f:convertDateTime pattern="dd.MM.yyyy"/>
+						</h:inputText>
 						<h:message for="geburtsdatum" styleClass="message"/>
 					</h:panelGroup>
 				</h:panelGrid>
