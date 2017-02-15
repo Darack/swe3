@@ -48,11 +48,11 @@ public class KundenHandler {
 	public void init() {
 		try {
 			utx.begin();
-			em.persist(new Kunde(Anrede.HERR, "Hugo", "Hermann", new Date(1970, 1, 1)));
-			em.persist(new Kunde(Anrede.HERR, "Willi", "Meier", new Date(1960, 2, 2)));
-			em.persist(new Kunde(Anrede.HERR, "Alan", "Turing", new Date(1912, 6, 23)));
-			em.persist(new Kunde(Anrede.HERR, "Donald", "Knuth", new Date(1938, 1, 10)));
-			em.persist(new Kunde(Anrede.HERR, "Edsger W.", "Dijkstra", new Date(1930, 5, 11)));
+			em.persist(new Kunde(Anrede.HERR, "Hugo", "Hermann", new Date(70, 1, 1)));
+			em.persist(new Kunde(Anrede.HERR, "Willi", "Meier", new Date(60, 2, 2)));
+			em.persist(new Kunde(Anrede.HERR, "Alan", "Turing", new Date(12, 6, 23)));
+			em.persist(new Kunde(Anrede.HERR, "Donald", "Knuth", new Date(38, 1, 10)));
+			em.persist(new Kunde(Anrede.HERR, "Edsger W.", "Dijkstra", new Date(30, 5, 11)));
 			kunden = new ListDataModel<Kunde>();
 			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
 			utx.commit();

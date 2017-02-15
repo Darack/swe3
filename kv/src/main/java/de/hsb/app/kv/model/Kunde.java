@@ -12,6 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 @NamedQuery(name="SelectKunden", query="Select k from Kunde k")
 @Entity
@@ -41,8 +43,11 @@ public class Kunde implements Serializable {
 	private Integer id;
 	
 	private Anrede anrede;
+	@Size(min=3, max = 30)
 	private String vorname;
+	@Size(min=3, max = 30)
 	private String nachname;
+	@Past
 	@Temporal(TemporalType.DATE)
 	private Date geburtsdatum;
 	@OneToOne(cascade=CascadeType.ALL)
