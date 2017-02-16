@@ -1,6 +1,6 @@
 package de.hsb.app.kv.controller;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -48,11 +48,11 @@ public class KundenHandler {
 	public void init() {
 		try {
 			utx.begin();
-			em.persist(new Kunde(Anrede.HERR, "Hugo", "Hermann", new Date(70, 1, 1)));
-			em.persist(new Kunde(Anrede.HERR, "Willi", "Meier", new Date(60, 2, 2)));
-			em.persist(new Kunde(Anrede.HERR, "Alan", "Turing", new Date(12, 6, 23)));
-			em.persist(new Kunde(Anrede.HERR, "Donald", "Knuth", new Date(38, 1, 10)));
-			em.persist(new Kunde(Anrede.HERR, "Edsger W.", "Dijkstra", new Date(30, 5, 11)));
+			em.persist(new Kunde(Anrede.HERR, "Hugo", "Hermann", LocalDate.of(1970, 1, 1)));
+			em.persist(new Kunde(Anrede.HERR, "Willi", "Meier", LocalDate.of(1960, 2, 2)));
+			em.persist(new Kunde(Anrede.HERR, "Alan", "Turing", LocalDate.of(1912, 6, 23)));
+			em.persist(new Kunde(Anrede.HERR, "Donald", "Knuth", LocalDate.of(1938, 1, 10)));
+			em.persist(new Kunde(Anrede.HERR, "Edsger W.", "Dijkstra", LocalDate.of(1930, 5, 11)));
 			kunden = new ListDataModel<Kunde>();
 			kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
 			utx.commit();

@@ -45,7 +45,8 @@
 					<f:facet name="header">Geburtsdatum</f:facet>
 					
 					<h:outputText value="#{kunde.geburtsdatum}">
-						<f:convertDateTime pattern="dd.MM.yyyy"/>
+<!-- 						<f:convertDateTime pattern="dd.MM.yyyy"/> -->
+						<f:converter converterId="localDateConverter" />
 					</h:outputText>
 				</h:column>
 				

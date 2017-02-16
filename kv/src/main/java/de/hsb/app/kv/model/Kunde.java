@@ -1,7 +1,7 @@
 package de.hsb.app.kv.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
@@ -28,7 +26,7 @@ public class Kunde implements Serializable {
 	 * @param nachname
 	 * @param geburtsdatum
 	 */
-	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum) {
+	public Kunde(Anrede anrede, String vorname, String nachname, LocalDate geburtsdatum) {
 		super();
 		this.anrede = anrede;
 		this.vorname = vorname;
@@ -47,9 +45,9 @@ public class Kunde implements Serializable {
 	private String vorname;
 	@Size(min=3, max = 30)
 	private String nachname;
-	@Past
-	@Temporal(TemporalType.DATE)
-	private Date geburtsdatum;
+//	@Past
+//	@Temporal(TemporalType.DATE)
+	private LocalDate geburtsdatum;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Kreditkarte kreditkarte;
 	
@@ -65,10 +63,10 @@ public class Kunde implements Serializable {
 	public void setNachname(String nachname) {
 		this.nachname = nachname;
 	}
-	public Date getGeburtsdatum() {
+	public LocalDate getGeburtsdatum() {
 		return geburtsdatum;
 	}
-	public void setGeburtsdatum(Date geburtsdatum) {
+	public void setGeburtsdatum(LocalDate geburtsdatum) {
 		this.geburtsdatum = geburtsdatum;
 	}
 
